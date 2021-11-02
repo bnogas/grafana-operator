@@ -264,6 +264,28 @@ spec:
                       token_url:
                         type: string
                     type: object
+                  auth.jwt:
+                    properties:
+                      cache_ttl:
+                        type: string
+                      email_claim:
+                        type: string
+                      enabled:
+                        nullable: true
+                        type: boolean
+                      expected_claims:
+                        type: string
+                      header_name:
+                        type: string
+                      jwk_set_file:
+                        type: string
+                      jwk_set_url:
+                        type: string
+                      key_file:
+                        type: string
+                      user_claim:
+                        type: string
+                    type: object
                   auth.ldap:
                     properties:
                       allow_sign_up:

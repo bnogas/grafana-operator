@@ -198,6 +198,10 @@ func (i *GrafanaIni) parseConfig(config map[string][]string) map[string][]string
 		config = i.cfgAuthLdap(config)
 	}
 
+	if i.cfg.AuthJwt != nil {
+		config = i.cfgAuthJwt(config)
+	}
+
 	if i.cfg.AuthProxy != nil {
 		config = i.cfgAuthProxy(config)
 	}
@@ -503,6 +507,23 @@ func (i *GrafanaIni) cfgAuthLdap(config map[string][]string) map[string][]string
 	items = appendBool(items, "allow_sign_up", i.cfg.AuthLdap.AllowSignUp)
 	items = appendStr(items, "config_file", i.cfg.AuthLdap.ConfigFile)
 	config["auth.ldap"] = items
+
+	return config
+}
+
+func (i *GrafanaIni) cfgAuthJwt(config map[string][]string) map[string][]string {
+	var items []string
+	items = appendBool(items, "enabled", i.cfg.AuthLdap.Enabled)
+	items = appendStr(items, "header_name", i.cfg.AuthJwt.HeaderName)
+	items = appendStr(items, "email_claim", i.cfg.AuthJwt.EmailClaim)
+	items = appendStr(items, "user_claim", i.cfg.AuthJwt.UserClaim)
+	items = appendStr(items, "jwk_set_url", i.cfg.AuthJwt.JwkSetUrl)
+	items = appendStr(items, "jwk_set_file", i.cfg.AuthJwt.JwkSetFile)
+	items = appendStr(items, "cache_ttl", i.cfg.AuthJwt.CacheTtl)
+	items = appendStr(items, "expected_claims", i.cfg.AuthJwt.ExpectedClaims)
+	items = appendStr(items, "key_file", i.cfg.AuthJwt.KeyFile)
+
+	config["auth.jwt"] = items
 
 	return config
 }

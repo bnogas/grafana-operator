@@ -156,6 +156,7 @@ type GrafanaConfig struct {
 	AuthGithub                    *GrafanaConfigAuthGithub                    `json:"auth.github,omitempty" ini:"auth.github,omitempty"`
 	AuthGitlab                    *GrafanaConfigAuthGitlab                    `json:"auth.gitlab,omitempty" ini:"auth.gitlab,omitempty"`
 	AuthGenericOauth              *GrafanaConfigAuthGenericOauth              `json:"auth.generic_oauth,omitempty" ini:"auth.generic_oauth,omitempty"`
+	AuthJwt                       *GrafanaConfigAuthJwt                       `json:"auth.jwt,omitempty" ini:"auth.jwt,omitempty"`
 	AuthOkta                      *GrafanaConfigAuthOkta                      `json:"auth.okta,omitempty" ini:"auth.okta,omitempty"`
 	AuthLdap                      *GrafanaConfigAuthLdap                      `json:"auth.ldap,omitempty" ini:"auth.ldap,omitempty"`
 	AuthProxy                     *GrafanaConfigAuthProxy                     `json:"auth.proxy,omitempty" ini:"auth.proxy,omitempty"`
@@ -445,6 +446,19 @@ type GrafanaConfigAuthLdap struct {
 	// +nullable
 	AllowSignUp *bool  `json:"allow_sign_up,omitempty" ini:"allow_sign_up"`
 	ConfigFile  string `json:"config_file,omitempty" ini:"config_file,omitempty"`
+}
+
+type GrafanaConfigAuthJwt struct {
+	// +nullable
+	Enabled        *bool  `json:"enabled,omitempty" ini:"enabled"`
+	HeaderName     string `json:"header_name,omitempty" ini:"header_name,omitempty"`
+	EmailClaim     string `json:"email_claim,omitempty" ini:"email_claim,omitempty"`
+	UserClaim      string `json:"user_claim,omitempty" ini:"user_claim,omitempty"`
+	JwkSetUrl      string `json:"jwk_set_url,omitempty" ini:"jwk_set_url,omitempty"`
+	JwkSetFile     string `json:"jwk_set_file,omitempty" ini:"jwk_set_file,omitempty"`
+	CacheTtl       string `json:"cache_ttl,omitempty" ini:"cache_ttl,omitempty"`
+	ExpectedClaims string `json:"expected_claims,omitempty" ini:"expected_claims,omitempty"`
+	KeyFile        string `json:"key_file,omitempty" ini:"key_file,omitempty"`
 }
 
 type GrafanaConfigAuthProxy struct {
